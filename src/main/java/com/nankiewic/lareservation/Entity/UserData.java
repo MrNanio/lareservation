@@ -17,6 +17,9 @@ public class UserData {
     @JoinColumn(name = "UserFk", nullable = false)
     private User user;
 
+    public UserData() {
+    }
+
     public Long getId() {
         return id;
     }

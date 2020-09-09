@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 @Entity
+@Table(name = "reservation")
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,12 +15,15 @@ public class Reservation {
     private BigDecimal cost;
     private String description;
     private String status;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "RoomFk", nullable = false)
     private Room room;
     @ManyToOne
     @JoinColumn(name = "CustomerFk", nullable = false)
     private Customer customer;
+
+    public Reservation() {
+    }
 
     public Long getId() {
         return id;

@@ -20,6 +20,9 @@ public class User {
     @JoinTable(name = "userRole", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
     private Set<Role> roles;
 
+    public User() {
+    }
+
     public Long getId() {
         return id;
     }

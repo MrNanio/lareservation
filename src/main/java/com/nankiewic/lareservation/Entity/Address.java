@@ -3,6 +3,7 @@ package com.nankiewic.lareservation.Entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "adrresses")
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +18,9 @@ public class Address {
     private UserData userData;
     @OneToOne(mappedBy = "address")
     private Host host;
+
+    public Address() {
+    }
 
     public Long getId() {
         return id;
@@ -54,7 +58,7 @@ public class Address {
         return buildingNumber;
     }
 
-    public void setBuilingNumber(String builingNumber) {
+    public void setBuildingNumber(String builingNumber) {
         this.buildingNumber = builingNumber;
     }
 
@@ -80,5 +84,13 @@ public class Address {
 
     public void setUserData(UserData userData) {
         this.userData = userData;
+    }
+
+    public Host getHost() {
+        return host;
+    }
+
+    public void setHost(Host host) {
+        this.host = host;
     }
 }

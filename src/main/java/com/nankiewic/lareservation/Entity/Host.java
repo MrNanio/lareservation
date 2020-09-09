@@ -1,8 +1,10 @@
 package com.nankiewic.lareservation.Entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 @Entity
+@Table(name = "hosts")
 public class Host {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,11 +14,14 @@ public class Host {
     @OneToOne
     @JoinColumn(name = "AddressFk", nullable = false)
     private Address address;
-    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Room> room;
+    @OneToMany(mappedBy = "host", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Room> room= new HashSet<>();
     @OneToOne
     @JoinColumn(name = "UserFk", nullable = false)
     private User user;
+
+    public Host() {
+    }
 
     public Long getId() {
         return id;

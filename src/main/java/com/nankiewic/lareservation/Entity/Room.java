@@ -1,20 +1,26 @@
 package com.nankiewic.lareservation.Entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "rooms")
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
+    @JoinColumn(name="HostFk")
     private Host host;
     @OneToOne
     private Address address;
-    @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Reservation> reservation;
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Reservation> reservation= new HashSet<>();;
     private String description;
+
+    public Room() {
+    }
 
     public Long getId() {
         return id;
