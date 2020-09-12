@@ -2,6 +2,7 @@ package com.nankiewic.lareservation.Entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.Set;
 @Entity
 public class User {
@@ -16,11 +17,15 @@ public class User {
     private LocalDateTime resetPasswordAt;
     private LocalDateTime createdAt;
     private LocalDateTime lastLoginAt;
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "userRole", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
-    private Set<Role> roles;
-
+    @OneToOne
+    @JoinColumn(name = "RoleId")
+    private Role roles;
     public User() {
+    }
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
     public Long getId() {
@@ -87,11 +92,13 @@ public class User {
         this.lastLoginAt = lastLoginAt;
     }
 
-    public Set<Role> getRoles() {
+    public Role getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Role roles) {
         this.roles = roles;
     }
+
+
 }
