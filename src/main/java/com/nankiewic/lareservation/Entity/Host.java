@@ -10,7 +10,7 @@ public class Host {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String status;
+    private boolean status;
     @OneToOne
     @JoinColumn(name = "AddressFk", nullable = false)
     private Address address;
@@ -39,11 +39,11 @@ public class Host {
         this.name = name;
     }
 
-    public String getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
